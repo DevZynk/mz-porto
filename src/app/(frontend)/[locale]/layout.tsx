@@ -1,13 +1,14 @@
 import React from 'react'
 import '../styles.css'
 import { Outfit, DM_Sans, Lora } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { Metadata } from 'next'
 import { LenisProvider } from '@/components/provider/lenis'
 import { ThemeProvider } from '@/components/provider/theme-provider'
 import Navbar from '@/components/navbar'
 import { Locale } from '@/lib/translate'
 import Footer from '@/components/footer'
-import { getMeta } from '@/lib/payload'
+import { getMeta, getServices } from '@/lib/payload'
 import { SiteProvider } from '@/components/provider/site'
 import { Media } from '@/payload-types'
 
@@ -85,7 +86,10 @@ export default async function RootLayout(props: {
   const { children } = props
   const params = await props.params
 
-  const meta = await getMeta(params.locale)
+  const [meta, { docs: serviceDocs }] = await Promise.all([
+    getMeta(params.locale),
+    getServices(params.locale),
+  ])
   const siteName = meta.siteSetting?.siteName || 'MZ Technology'
   const siteDescription = meta.siteSetting?.siteDescription || ''
   const canonicalBase = meta.advancedSEO?.canonicalUrl || ''
@@ -97,6 +101,7 @@ export default async function RootLayout(props: {
 
   const siteValue = {
     siteName,
+    siteDescription,
     location: address?.location || '',
     logoUrl: logoMedia?.url || null,
     alt: logoMedia?.alt || siteName,
@@ -108,6 +113,13 @@ export default async function RootLayout(props: {
     },
     maps: address?.maps || '',
     address: address?.location || '',
+    email: social.email || '',
+    phone: social.phone || '',
+    services: (serviceDocs || []).map((s: any) => ({
+      id: s.id,
+      title: s.title,
+      slug: s.slug,
+    })),
   }
 
   return (
@@ -176,10 +188,22 @@ export default async function RootLayout(props: {
                 <Navbar locale={params.locale as Locale} />
                 {children}
               </main>
-              <Footer locale={params.locale as Locale} />
+              <Footer
+                locale={params.locale as Locale}
+                siteDescription={siteDescription}
+                location={address?.location || ''}
+                maps={address?.maps || ''}
+                social={social}
+                services={(serviceDocs || []).map((s: any) => ({
+                  id: s.id,
+                  title: s.title,
+                  slug: s.slug,
+                }))}
+              />
             </LenisProvider>
           </SiteProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )

@@ -32,7 +32,7 @@ export default function CardProject({
       {image?.url && (
         <Link
           href={`/${locale}/project/${slug}`}
-          className="relative aspect-square w-20 md:w-28 rounded-xl overflow-hidden bg-muted border border-border/50 shrink-0 cursor-pointer block"
+          className="relative aspect-square hidden md:block w-20 md:w-28 rounded-xl overflow-hidden bg-muted border border-border/50 shrink-0 cursor-pointer"
         >
           <Image
             unoptimized

@@ -77,7 +77,7 @@ export default function ScrollReveal({
   }, [direction, distance, duration, delay, scrub, once])
 
   return (
-    <div ref={elementRef} className={className} style={{ opacity: 0 }}>
+    <div ref={elementRef} className={className}>
       {children}
     </div>
   )

@@ -10,7 +10,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
   return (
     <NavbarClient>
       <div className="flex items-center justify-between max-w-4xl mx-auto w-full px-4">
-        <Logo locale={locale} />
+        <Logo />
         <DesktopNav locale={locale} />
         <div className="flex items-center gap-3">
           <LocaleTogle />

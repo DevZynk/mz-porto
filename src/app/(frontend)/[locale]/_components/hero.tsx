@@ -8,6 +8,7 @@ import { Media } from '@/payload-types'
 import ShinyText from '@/components/animation/shiny-text'
 import Threads from './client-threads'
 import { ArrowDownIcon } from '@phosphor-icons/react/dist/ssr'
+import { useIsMobile } from '@/hooks/use-is-mobile'
 
 export default async function Hero({ locale }: { locale: Locale }) {
   const res = await getHero(locale)
@@ -51,8 +52,8 @@ export default async function Hero({ locale }: { locale: Locale }) {
             style={{ animationDuration: '15s' }}
           />
 
-          {/* WebGL Threads Canvas */}
-          <div className="absolute inset-0 z-10 opacity-70">
+          {/* WebGL Threads Canvas (auto-disabled on mobile) */}
+       <div className="absolute hidden md:block inset-0 z-10 opacity-70">
             <Threads amplitude={2} distance={0.3} enableMouseInteraction />
           </div>
         </div>
@@ -93,7 +94,9 @@ export default async function Hero({ locale }: { locale: Locale }) {
           <ScrollReveal delay={0.4} direction="up" distance={15}>
             <div className="flex items-center justify-center gap-3 pt-6 flex-wrap">
               <a href="#contact">
-                <Button size="lg" className="shadow-lg shadow-primary/20">{t(locale, 'Contact Us', 'Hubungi Kami')}</Button>
+                <Button size="lg" className="shadow-lg shadow-primary/20">
+                  {t(locale, 'Contact Us', 'Hubungi Kami')}
+                </Button>
               </a>
               <a href="#about">
                 <Button size="lg" variant="outline">
@@ -105,7 +108,11 @@ export default async function Hero({ locale }: { locale: Locale }) {
 
           <ScrollReveal delay={0.55} direction="up" distance={10}>
             <p className="text-xs text-muted-foreground/60 mt-6 font-medium">
-              {t(locale, 'Trusted by 50+ companies across Indonesia', 'Dipercaya oleh 50+ perusahaan di Indonesia')}
+              {t(
+                locale,
+                'Trusted by 50+ companies across Indonesia',
+                'Dipercaya oleh 50+ perusahaan di Indonesia',
+              )}
             </p>
           </ScrollReveal>
         </div>

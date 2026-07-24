@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
+import { useIsMobile } from '@/hooks/use-is-mobile'
 
 interface ThreadsProps {
   color?: [number, number, number]
@@ -154,12 +155,15 @@ const Threads: React.FC<ThreadsProps> = ({
   const containerRef = useRef<HTMLDivElement>(null)
   const animationFrameId = useRef<number>(0)
 
+  const isMobile = useIsMobile()
+
   // Keep the latest props in a ref so updating them mutates the live shader
   // uniforms instead of tearing down and rebuilding the whole WebGL context.
   const propsRef = useRef({ color, amplitude, distance, enableMouseInteraction })
   propsRef.current = { color, amplitude, distance, enableMouseInteraction }
 
   useEffect(() => {
+    if (isMobile) return
     if (!containerRef.current) return
     const container = containerRef.current
 

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useCallback, useEffect, useRef } from 'react'
-import { motion, useMotionValue, useAnimationFrame, useTransform } from 'motion/react'
+import { motion, useMotionValue, useAnimationFrame, useTransform, useInView } from 'motion/react'
 
 interface ShinyTextProps {
   text: string
@@ -29,6 +29,8 @@ const ShinyText: React.FC<ShinyTextProps> = ({
   direction = 'left',
   delay = 0,
 }) => {
+  const ref = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: false })
   const [isPaused, setIsPaused] = useState(false)
   const progress = useMotionValue(0)
   const elapsedRef = useRef(0)
@@ -39,7 +41,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
   const delayDuration = delay * 1000
 
   useAnimationFrame((time) => {
-    if (disabled || isPaused) {
+    if (disabled || isPaused || !isInView) {
       lastTimeRef.current = null
       return
     }
@@ -119,6 +121,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
 
   return (
     <motion.span
+      ref={ref}
       className={`inline-block ${className}`}
       style={{ ...gradientStyle, backgroundPosition }}
       onMouseEnter={handleMouseEnter}

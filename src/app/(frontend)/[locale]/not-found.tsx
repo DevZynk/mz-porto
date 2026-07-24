@@ -1,7 +1,11 @@
 import Link from 'next/link'
 
-export default async function NotFound(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params
+export default async function NotFound(props: { params?: Promise<{ locale?: string }> }) {
+  let locale = 'en'
+  try {
+    const resolved = await props.params
+    if (resolved?.locale) locale = resolved.locale
+  } catch {}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">

@@ -5,7 +5,7 @@ import { t, Locale } from '@/lib/translate'
 import { CpuIcon } from '@phosphor-icons/react/dist/ssr'
 import { Media } from '@/payload-types'
 import ClientsParallaxScroll from './clients-parallax-scroll'
-import React from 'react'
+import LogoLoop, { type LogoItem } from '@/components/animation/logo-loop'
 
 export default async function About({ locale }: { locale: Locale }) {
   const data = await getAbout(locale)
@@ -41,7 +41,6 @@ export default async function About({ locale }: { locale: Locale }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full max-w-4xl mx-auto">
           {/* Left Side: Story & Stats */}
           <ScrollReveal direction="left" className="lg:col-span-5 space-y-6">
-            {/* Glassmorphism Story Card */}
             <div className="relative rounded-2xl border border-border/60 bg-muted/30 backdrop-blur-sm p-6 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
@@ -59,7 +58,6 @@ export default async function About({ locale }: { locale: Locale }) {
               </p>
             </div>
 
-            {/* Stats with decorative accent */}
             <div className="rounded-xl border border-border/40 bg-muted/20 px-6 py-5">
               <div className="flex items-center gap-10">
                 {data.item?.[0] && (
@@ -72,7 +70,6 @@ export default async function About({ locale }: { locale: Locale }) {
                     </div>
                   </div>
                 )}
-
                 {data.item?.[1] && (
                   <>
                     <div className="w-px h-10 bg-border" />
@@ -90,12 +87,10 @@ export default async function About({ locale }: { locale: Locale }) {
             </div>
           </ScrollReveal>
 
-          {/* Decorative vertical divider (desktop only) */}
           <div className="hidden lg:flex lg:col-span-1 items-stretch justify-center pt-4">
             <div className="w-px bg-linear-to-b from-transparent via-border to-transparent" />
           </div>
 
-          {/* Right Side: Paragraphs */}
           <ScrollReveal
             direction="right"
             className="lg:col-span-6 space-y-5 text-foreground/80 leading-relaxed text-base sm:text-lg"
@@ -115,15 +110,34 @@ export default async function About({ locale }: { locale: Locale }) {
           </ScrollReveal>
         </div>
       </Container>
+
       {clientLogos.length > 0 && (
-        <ClientsParallaxScroll
-          heading={
-            <h3 className="text-2xl w-full mx-auto font-bold font-mono tracking-tight text-foreground text-center">
+        <>
+          <div className="block md:hidden py-12 border-t border-border">
+            <h3 className="text-2xl font-bold font-mono tracking-tight text-foreground text-center mb-8">
               {t(locale, 'Our Clients', 'Klien Kami')}
             </h3>
-          }
-          logos={clientLogos}
-        />
+            <LogoLoop
+              logos={clientLogos.map((l) => ({ src: l.logoUrl, alt: l.name }) satisfies LogoItem)}
+              speed={80}
+              direction="left"
+              logoHeight={60}
+              gap={40}
+              scaleOnHover
+              fadeOut
+            />
+          </div>
+          <div className="hidden md:block">
+            <ClientsParallaxScroll
+              heading={
+                <h3 className="text-2xl w-full mx-auto font-bold font-mono tracking-tight text-foreground text-center">
+                  {t(locale, 'Our Clients', 'Klien Kami')}
+                </h3>
+              }
+              logos={clientLogos}
+            />
+          </div>
+        </>
       )}
     </>
   )
