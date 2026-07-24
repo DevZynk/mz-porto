@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import Link from 'next/link'
 import { Media, Category, News } from '@/payload-types'
 import { HandsClappingIcon, ChatCircleIcon } from '@phosphor-icons/react/dist/ssr'
@@ -92,9 +92,9 @@ export default function CardNews({ news, locale, isLast, readTime }: CardNewsPro
           href={`/${locale}/news/${news.slug}`}
           className="relative block w-full h-30 md:w-52 md:h-32 rounded-md overflow-hidden bg-muted shrink-0 cursor-pointer"
         >
-          <Image
+          <ImageBox
             unoptimized
-            src={image.url}
+            media={image.url}
             alt={image.alt || metaTitle || ''}
             fill
             sizes="(max-width: 768px) 100vw, 208px"

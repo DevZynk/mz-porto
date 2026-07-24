@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { getPayloadClient, getMeta, getService } from '@/lib/payload'
 import RichText from '@/components/rich-text'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import { notFound } from 'next/navigation'
 import { Media, Project, News as NewsType, Service } from '@/payload-types'
 import { t, Locale } from '@/lib/translate'
@@ -130,7 +130,9 @@ export default async function ServiceDetailPage(props: {
               {locale === 'en' ? 'Services' : 'Layanan'}
             </Link>
             <span className="opacity-40">/</span>
-            <span className="text-foreground font-semibold truncate max-w-[200px]">{service.title}</span>
+            <span className="text-foreground font-semibold truncate max-w-[200px]">
+              {service.title}
+            </span>
           </div>
 
           {/* Service Details Main Layout */}
@@ -139,9 +141,9 @@ export default async function ServiceDetailPage(props: {
             <div className="lg:col-span-5 space-y-6">
               {image?.url && (
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-border/50 bg-muted shadow-xl shadow-black/5">
-                  <Image
+                  <ImageBox
                     unoptimized
-                    src={image.url}
+                    media={image.url}
                     alt={image.alt || service.title}
                     fill
                     className="object-cover"
@@ -184,7 +186,11 @@ export default async function ServiceDetailPage(props: {
                         key={f.id || f.feature}
                         className="flex items-center gap-2.5 text-sm text-muted-foreground bg-muted/30 rounded-lg px-3 py-2 border border-border/40"
                       >
-                        <CheckCircleIcon size={15} className="text-primary shrink-0" weight="bold" />
+                        <CheckCircleIcon
+                          size={15}
+                          className="text-primary shrink-0"
+                          weight="bold"
+                        />
                         <span>{f.feature}</span>
                       </li>
                     ))}

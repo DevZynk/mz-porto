@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { getPayloadClient, getMeta, getProject } from '@/lib/payload'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import React from 'react'
 import { Media, Category, Service, Project } from '@/payload-types'
 import RichText from '@/components/rich-text'
@@ -181,9 +181,9 @@ export default async function ProjectShowcasePage(props: Props) {
         {/* Featured Image */}
         {image?.url && (
           <div className="relative w-full aspect-video rounded-xl overflow-hidden my-8 border bg-muted shadow-sm">
-            <Image
+            <ImageBox
               unoptimized
-              src={image.url}
+              media={image.url}
               alt={image.alt || metaTitle || 'project showcase image'}
               fill
               className="object-cover"
@@ -238,9 +238,9 @@ export default async function ProjectShowcasePage(props: Props) {
                         href={`/${locale}/project/${proj.slug}`}
                         className="relative block aspect-video overflow-hidden"
                       >
-                        <Image
+                        <ImageBox
                           unoptimized
-                          src={projImg.url}
+                          media={projImg.url}
                           alt={projImg.alt || proj.meta?.metaTitle || ''}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 250px"

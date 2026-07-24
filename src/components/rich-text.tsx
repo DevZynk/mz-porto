@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 
 type LexicalNode = {
   type: string
@@ -145,9 +145,9 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
           key={index}
           className="my-8 relative w-full aspect-video rounded-xl overflow-hidden border bg-muted"
         >
-          <Image
+          <ImageBox
             unoptimized
-            src={uploadValue.url}
+            media={uploadValue.url}
             alt={uploadValue.alt || ''}
             fill
             sizes="(max-width: 1200px) 100vw, 800px"

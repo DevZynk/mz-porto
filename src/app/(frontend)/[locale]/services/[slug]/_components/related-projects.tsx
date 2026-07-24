@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import Link from 'next/link'
 import { Media, Project } from '@/payload-types'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
@@ -31,9 +31,9 @@ export default function RelatedProjects({ relatedProjects, locale }: RelatedProj
                   href={`/${locale}/project/${project.slug}`}
                   className="relative block aspect-3/2 overflow-hidden"
                 >
-                  <Image
+                  <ImageBox
                     unoptimized
-                    src={projImg.url}
+                    media={projImg.url}
                     alt={projImg.alt || project.meta?.metaTitle || ''}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 360px"

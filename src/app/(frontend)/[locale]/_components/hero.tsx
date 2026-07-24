@@ -1,5 +1,5 @@
 import Container from '@/components/layout/container'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import { getHero } from '@/lib/payload'
 import ScrollReveal from '@/components/animation/scroll-reveal'
 import { Button } from '@/components/ui/button'
@@ -24,9 +24,9 @@ export default async function Hero({ locale }: { locale: Locale }) {
           {heroImage?.url && (
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
               <div className="relative w-full aspect-video min-h-full min-w-full overflow-hidden">
-                <Image
+                <ImageBox
                   unoptimized
-                  src={heroImage.url}
+                  media={heroImage.url}
                   alt={heroImage.alt || title || 'Hero Background'}
                   fill
                   priority
@@ -53,7 +53,7 @@ export default async function Hero({ locale }: { locale: Locale }) {
           />
 
           {/* WebGL Threads Canvas (auto-disabled on mobile) */}
-       <div className="absolute hidden md:block inset-0 z-10 opacity-70">
+          <div className="absolute hidden md:block inset-0 z-10 opacity-70">
             <Threads amplitude={2} distance={0.3} enableMouseInteraction />
           </div>
         </div>

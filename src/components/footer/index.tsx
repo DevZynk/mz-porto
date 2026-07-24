@@ -61,8 +61,8 @@ export default function Footer({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 w-full md:flex md:flex-row md:gap-16 lg:gap-24 md:w-auto">
-            <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-2 gap-8 w-full md:flex md:flex-row md:gap-12 lg:gap-24 md:w-full">
+            <div className="flex flex-col shrink gap-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {t(locale as any, 'Quick Links', 'Tautan Cepat')}
               </h3>
@@ -96,7 +96,7 @@ export default function Footer({
             </div>
           </div>
         </div>
-        <Copyright locale={locale as any} />
+        <Copyright />
       </div>
     </footer>
   )

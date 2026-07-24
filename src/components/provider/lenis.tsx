@@ -16,8 +16,8 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      smoothWheel: true,
+      duration: isMobile? 0 : 1.2,
+      smoothWheel: !isMobile,
       autoRaf: true,
       anchors: {
         offset: -80,

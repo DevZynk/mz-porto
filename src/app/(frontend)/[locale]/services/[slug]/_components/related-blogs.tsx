@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import Link from 'next/link'
 import { Media, News } from '@/payload-types'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
@@ -31,9 +31,9 @@ export default function RelatedBlogs({ relatedBlogs, locale }: RelatedBlogsProps
                   href={`/${locale}/news/${blog.slug}`}
                   className="relative block aspect-video overflow-hidden"
                 >
-                  <Image
+                  <ImageBox
                     unoptimized
-                    src={blogImg.url}
+                    media={blogImg.url}
                     alt={blogImg.alt || blog.meta?.metaTitle || ''}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 360px"

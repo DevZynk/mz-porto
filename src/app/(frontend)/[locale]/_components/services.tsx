@@ -1,7 +1,7 @@
 import { getFeaturedServices } from '@/lib/payload'
 import { t, Locale } from '@/lib/translate'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import { Media, Service } from '@/payload-types'
 import { ArrowUpRightIcon, CheckCircleIcon } from '@phosphor-icons/react/dist/ssr'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,8 @@ type Props = {
 
 export default async function ServicesSection({ locale }: Props) {
   const { docs } = await getFeaturedServices(locale)
-  const services = docs as unknown as Service[]
+  let services = docs as unknown as Service[]
+  services = [...services].sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0))
 
   if (services.length === 0) {
     return (
@@ -85,9 +86,9 @@ export default async function ServicesSection({ locale }: Props) {
                       href={`/${locale}/services/${slug}`}
                       className="relative w-full aspect-3/2 rounded-sm overflow-hidden bg-muted mb-5 cursor-pointer block border border-border/40"
                     >
-                      <Image
+                      <ImageBox
                         unoptimized
-                        src={serviceImg.url}
+                        media={serviceImg.url}
                         alt={serviceImg.alt || title || ''}
                         fill
                         sizes="(max-width: 768px) 100vw, 350px"
@@ -208,9 +209,9 @@ export default async function ServicesSection({ locale }: Props) {
                           href={`/${locale}/services/${slug}`}
                           className="relative shrink-0 w-28 aspect-3/2 overflow-hidden bg-muted border-r border-border/40"
                         >
-                          <Image
+                          <ImageBox
                             unoptimized
-                            src={serviceImg.url}
+                            media={serviceImg.url}
                             alt={serviceImg.alt || title || ''}
                             fill
                             sizes="120px"
@@ -219,7 +220,7 @@ export default async function ServicesSection({ locale }: Props) {
                         </Link>
                       )}
                       <div className="flex-1 flex flex-col justify-between min-w-0">
-                        <CardContent className="px-4 pt-4 pb-2">
+                        <CardContent className="px-4 pt-6 pb-2">
                           <Link href={`/${locale}/services/${slug}`}>
                             <h3 className="text-sm font-bold tracking-tight text-foreground line-clamp-1">
                               {title}

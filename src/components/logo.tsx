@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import { useSite } from '@/components/provider/site'
 
 export default function Logo({ size = 150 }: { size?: number }) {
@@ -11,9 +11,9 @@ export default function Logo({ size = 150 }: { size?: number }) {
   }
 
   return (
-    <Image
+    <ImageBox
       unoptimized
-      src={logoUrl}
+      media={logoUrl}
       alt={alt || 'logo'}
       width={size}
       height={size / 2}

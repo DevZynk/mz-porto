@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import Link from 'next/link'
 import { Media } from '@/payload-types'
 import { t, Locale } from '@/lib/translate'
@@ -34,9 +34,9 @@ export default function CardProject({
           href={`/${locale}/project/${slug}`}
           className="relative aspect-square hidden md:block w-20 md:w-28 rounded-xl overflow-hidden bg-muted border border-border/50 shrink-0 cursor-pointer"
         >
-          <Image
+          <ImageBox
             unoptimized
-            src={image.url}
+            media={image.url}
             alt={image.alt || title || ''}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 176px, 208px"

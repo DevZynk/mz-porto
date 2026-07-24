@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { getPayloadClient, getMeta, getArticle } from '@/lib/payload'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
+import { ImageBox } from '@inoo-ch/payload-image-optimizer/client'
 import React from 'react'
 import { Media, Category, Service, News } from '@/payload-types'
 import RichText from '@/components/rich-text'
@@ -212,9 +212,9 @@ export default async function NewsArticlePage(props: Props) {
         {/* Featured Image */}
         {image?.url && (
           <div className="relative w-full aspect-video rounded-xl overflow-hidden my-8 border bg-muted">
-            <Image
+            <ImageBox
               unoptimized
-              src={image.url}
+              media={image.url}
               alt={image.alt || metaTitle || ''}
               fill
               className="object-cover"
@@ -272,9 +272,9 @@ export default async function NewsArticlePage(props: Props) {
                         href={`/${locale}/news/${item.slug}`}
                         className="relative block aspect-video overflow-hidden"
                       >
-                        <Image
+                        <ImageBox
                           unoptimized
-                          src={itemImg.url}
+                          media={itemImg.url}
                           alt={itemImg.alt || item.meta?.metaTitle || ''}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 250px"

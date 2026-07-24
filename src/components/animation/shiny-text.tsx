@@ -112,6 +112,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
   }, [pauseOnHover])
 
   const gradientStyle: React.CSSProperties = {
+    color,
     backgroundImage: `linear-gradient(${spread}deg, ${color} 0%, ${color} 35%, ${shineColor} 50%, ${color} 65%, ${color} 100%)`,
     backgroundSize: '200% auto',
     WebkitBackgroundClip: 'text',
