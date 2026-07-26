@@ -1,6 +1,5 @@
 import { OptimizationStatus as OptimizationStatus_841f288f491e1fefe208477b779cfd1c } from '@inoo-ch/payload-image-optimizer/client'
 import { RegenerationButton as RegenerationButton_841f288f491e1fefe208477b779cfd1c } from '@inoo-ch/payload-image-optimizer/client'
-import { UploadOptimizer as UploadOptimizer_841f288f491e1fefe208477b779cfd1c } from '@inoo-ch/payload-image-optimizer/client'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -40,7 +39,6 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 export const importMap = {
   "@inoo-ch/payload-image-optimizer/client#OptimizationStatus": OptimizationStatus_841f288f491e1fefe208477b779cfd1c,
   "@inoo-ch/payload-image-optimizer/client#RegenerationButton": RegenerationButton_841f288f491e1fefe208477b779cfd1c,
-  "@inoo-ch/payload-image-optimizer/client#UploadOptimizer": UploadOptimizer_841f288f491e1fefe208477b779cfd1c,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

@@ -1,5 +1,10 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor, BlocksFeature, CodeBlock, UploadFeature } from '@payloadcms/richtext-lexical'
+import {
+  lexicalEditor,
+  BlocksFeature,
+  CodeBlock,
+  UploadFeature,
+} from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -7,7 +12,6 @@ import sharp from 'sharp'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { imageOptimizer } from '@inoo-ch/payload-image-optimizer'
 import { seoPlugin } from '@payloadcms/plugin-seo'
-
 
 import { Users } from './payload/collections/Users'
 import { Media } from './payload/collections/Media'
@@ -32,7 +36,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Services, News, Category, Clients, Projects],
-  globals:[Meta, Hero, About],
+  globals: [Meta, Hero, About],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
@@ -49,10 +53,7 @@ export default buildConfig({
         },
       }),
       BlocksFeature({
-        blocks: [
-          CodeBlock(),
-          VideoEmbedBlock,
-        ],
+        blocks: [CodeBlock(), VideoEmbedBlock],
       }),
     ],
   }),
@@ -80,23 +81,27 @@ export default buildConfig({
     },
   }),
   sharp,
-    plugins: [
+  plugins: [
     seoPlugin({
       collections: ['services'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => `MZ Technology — ${doc.title || doc.meta?.metaTitle || ''}`,
-      generateDescription: ({ doc }) => doc.description || doc.meta?.metaDescription || doc.smallDescription || '',
+      generateDescription: ({ doc }) =>
+        doc.description || doc.meta?.metaDescription || doc.smallDescription || '',
     }),
     imageOptimizer({
       collections: {
         media: true,
       },
 
-      format: { format: 'webp', quality: 90 },
-      maxDimensions: { width: 2560, height: 2560 },
+      format: { format: 'webp', quality: 78 },
+      maxDimensions: {
+        width: 1920,
+        height: 1920,
+      },
       generateThumbHash: true,
       stripMetadata: true,
-      clientOptimization: true,
+      clientOptimization: false,
       disabled: false,
       adminThumbnail: 'auto',
       metadataPolicy: ({ metadata }) => metadata.format === 'jpeg',

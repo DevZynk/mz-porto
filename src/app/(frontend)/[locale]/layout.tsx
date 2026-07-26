@@ -204,6 +204,8 @@ export default async function RootLayout(props: {
           </SiteProvider>
         </ThemeProvider>
         <Analytics />
+
+        <script src="https://collect.hztech.id/analytics.min.js" />
       </body>
     </html>
   )

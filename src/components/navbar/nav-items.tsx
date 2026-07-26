@@ -5,6 +5,6 @@ export const getNavLinks = (locale: Locale) => [
   { label: t(locale, 'About', 'Tentang'), path: '#about' },
   { label: t(locale, 'Services', 'Layanan'), path: '#services' },
   { label: t(locale, 'Project', 'Proyek'), path: '#projects' },
-  { label: t(locale, 'News', 'Berita'), path: '#news' },
   { label: t(locale, 'Contact', 'Kontak'), path: '#contact' },
+  { label: t(locale, 'News', 'Berita'), path: '/news' },
 ]

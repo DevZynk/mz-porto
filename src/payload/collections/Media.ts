@@ -14,6 +14,7 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
+
   fields: [
     {
       name: 'alt',
@@ -50,7 +51,7 @@ export const Media: CollectionConfig = {
   },
   upload: {
     staticDir: 'media',
-    adminThumbnail: 'thumbnail',
+    adminThumbnail: 'auto',
     mimeTypes: ['image/*'],
   },
 }

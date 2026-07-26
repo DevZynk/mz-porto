@@ -1,5 +1,4 @@
 import {
-  ArrowUpRightIcon,
   EnvelopeIcon,
   FacebookLogoIcon,
   InstagramLogoIcon,
@@ -11,11 +10,7 @@ import {
   XLogoIcon,
 } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
-import { Meta } from '@/payload-types'
-
-type Props = {
-  val?: Meta['socialMedia']
-}
+import { normalize_phone } from '@/lib/normalize.text'
 
 const Icons = {
   facebook: FacebookLogoIcon,
@@ -41,8 +36,9 @@ const platformNames: Record<string, string> = {
   phone: 'Phone',
 }
 
-import { normalize_phone } from '@/lib/normalize.text'
-import { Button } from '../ui/button'
+type Props = {
+  val?: Record<string, string | null | undefined>
+}
 
 export default function Contacts({ val }: Props) {
   if (!val) return null
@@ -60,31 +56,25 @@ export default function Contacts({ val }: Props) {
       }
 
       const Icon = Icons[key as keyof typeof Icons] || EnvelopeIcon
+      const name = platformNames[key] || key
 
-      return {
-        key,
-        title: platformNames[key] || key,
-        href,
-        Icon,
-      }
+      return { key, name, href, Icon }
     })
 
   return (
     <div className="flex flex-row gap-1">
-      {socialLinks.map((item) => {
-        const Icon = item.Icon
-        return (
-          <Button key={item.key} variant={'ghost'} size={'icon-lg'} className='hover:scale-110'>
-            <Link
-              href={item.href}
-              target="_blank"
-              className="flex items-center justify-between gap-4 py-1 h transition-all duration-300 transform  group"
-            >
-              <Icon size={18} />
-            </Link>
-          </Button>
-        )
-      })}
+      {socialLinks.map(({ key, name, href, Icon }) => (
+        <Link
+          key={key}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={name}
+          className="inline-flex items-center justify-center w-9 h-9 rounded-md hover:scale-110 hover:bg-muted transition-all duration-300"
+        >
+          <Icon size={18} />
+        </Link>
+      ))}
     </div>
   )
 }

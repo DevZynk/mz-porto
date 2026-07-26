@@ -2,7 +2,7 @@ import { Locale } from '@/lib/translate'
 import { Metadata } from 'next'
 import { getMeta, getHero } from '@/lib/payload'
 import { Media } from '@/payload-types'
-import LatestNewsSection from './_components/news'
+// import LatestNewsSection from './_components/news'
 import Hero from './_components/hero'
 import About from './_components/about'
 import ServicesSection from './_components/services'
@@ -60,7 +60,7 @@ export default async function HomePage(props: Props) {
       <About locale={locale} />
       <ServicesSection locale={locale} />
       <ProjectList locale={locale} />
-      <LatestNewsSection locale={locale} />
+      {/* <LatestNewsSection locale={locale} /> */}
     </>
   )
 }

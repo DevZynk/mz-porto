@@ -1,20 +1,15 @@
 import Copyright from './copyright'
-import { t } from '@/lib/translate'
+import { Locale, t } from '@/lib/translate'
 import { MapPinIcon } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 import Contacts from './contacts'
 import Logo from '../logo'
+import { getNavLinks } from '../navbar/nav-items'
 
-const footerNavLinks = (locale: string) => [
-  { label: t(locale as any, 'Home', 'Beranda'), path: '/' },
-  { label: t(locale as any, 'About', 'Tentang'), path: '#about' },
-  { label: t(locale as any, 'Services', 'Layanan'), path: '/services' },
-  { label: t(locale as any, 'Project', 'Proyek'), path: '/project' },
-  { label: t(locale as any, 'News', 'Berita'), path: '/news' },
-]
+
 
 type Props = {
-  locale: string
+  locale: Locale
   siteDescription: string
   location: string
   maps: string
@@ -30,7 +25,7 @@ export default function Footer({
   social,
   services,
 }: Props) {
-  const navLinks = footerNavLinks(locale)
+  const navLinks = getNavLinks(locale)
 
   return (
     <footer className="border-t py-10 md:py-16 w-full bg-background">
@@ -96,7 +91,7 @@ export default function Footer({
             </div>
           </div>
         </div>
-        <Copyright />
+        <Copyright locale={locale} />
       </div>
     </footer>
   )
