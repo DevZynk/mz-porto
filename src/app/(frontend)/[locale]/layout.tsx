@@ -11,6 +11,7 @@ import Footer from '@/components/footer'
 import { getMeta, getServices } from '@/lib/payload'
 import { SiteProvider } from '@/components/provider/site'
 import { Media } from '@/payload-types'
+import Script from 'next/script'
 
 export const revalidate = 60
 
@@ -205,7 +206,7 @@ export default async function RootLayout(props: {
         </ThemeProvider>
         <Analytics />
 
-        <script src="https://collect.hztech.id/analytics.min.js" />
+        <Script src="https://collect.hztech.id/analytics.min.js" />
       </body>
     </html>
   )
