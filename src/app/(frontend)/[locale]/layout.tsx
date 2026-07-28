@@ -180,6 +180,8 @@ export default async function RootLayout(props: {
             }),
           }}
         />
+        <Script defer src="https://collect.hztech.id/script.js" data-website-id="d7409bae-1948-4b38-afaa-a68a6144ca5e"></Script>
+        <Script defer src="https://collect.hztech.id/recorder.js" data-website-id="d7409bae-1948-4b38-afaa-a68a6144ca5e"></Script>
       </head>
       <body>
         <ThemeProvider defaultTheme="light" attribute="class" disableTransitionOnChange>
@@ -206,7 +208,6 @@ export default async function RootLayout(props: {
         </ThemeProvider>
         <Analytics />
 
-        <Script src="https://collect.hztech.id/analytics.min.js" />
       </body>
     </html>
   )
